@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salem Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+<link rel="icon" href="download.png" type="image/x-icon">
+<style>
+body {
+  margin:0;
+  font-family: 'Poppins', sans-serif;
+  color:white;
+  overflow-x:hidden;
+  background: linear-gradient(-45deg, #0f172a, #1e293b, #020617, #0ea5e9);
+  background-size: 400% 400%;
+  animation: gradientMove 10s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% {background-position:0% 50%;}
+  50% {background-position:100% 50%;}
+  100% {background-position:0% 50%;}
+}
+
+#progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 4px;
+  background: linear-gradient(90deg, #38bdf8, #0ea5e9);
+  z-index: 9999;
+  box-shadow: 0 0 10px #38bdf8;
+}
+
+nav {
+  display:flex;
+  justify-content:space-between;
+  padding:20px;
+  background:rgba(0,0,0,0.5);
+  backdrop-filter:blur(10px);
+}
+
+nav a {
+  color:white;
+  text-decoration:none;
+  margin-left:20px;
+}
+
+.hero {
+  padding:100px 20px;
+}
+
+.hero-container {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  max-width:1100px;
+  margin:auto;
+  flex-wrap:wrap;
+}
+
+.hero-text {
+  flex:1;
+}
+
+.hero-text h1 {
+  font-size:50px;
+}
+
+.hero-text span {
+  color:#38bdf8;
+}
+
+.hero-text p {
+  font-size:18px;
+  opacity:0.8;
+  margin-top:10px;
+}
+
+.hero-img {
+  flex:1;
+  text-align:right;
+}
+
+.hero-img img {
+  width:300px;
+  border-radius:50%;
+  border:4px solid #38bdf8;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {transform: translateY(0px);}
+  50% {transform: translateY(-20px);}
+  100% {transform: translateY(0px);}
+}
+
+.buttons {
+  margin-top:20px;
+}
+
+.btn {
+  display:inline-block;
+  padding:10px 20px;
+  margin-right:10px;
+  border-radius:25px;
+  text-decoration:none;
+  color:white;
+  transition:0.3s;
+}
+
+.whatsapp { background:#25D366; }
+.github { background:#333; }       /* GitHub أسود */
+.x { background:#1DA1F2; }        /* X أزرق */
+.discord { background:#5865F2; }   /* Discord أزرق مميز */
+
+.btn:hover {
+  transform:scale(1.1);
+  opacity:0.8;
+}
+
+/* Projects Section */
+.projects {
+  padding:50px 20px;
+  text-align:center;
+}
+
+.projects h2 {
+  font-size:36px;
+  margin-bottom:40px;
+}
+
+.project-card {
+  display:inline-block;
+  background:#1e293b;
+  padding:20px;
+  margin:20px;
+  border-radius:15px;
+  width:300px;
+  vertical-align:top;
+  transition:0.3s;
+  box-shadow:0 5px 15px rgba(0,0,0,0.3);
+  opacity:0;
+  transform: translateY(30px);
+}
+
+.project-card.show {
+  opacity:1;
+  transform: translateY(0);
+  transition: all 0.6s ease-out;
+}
+
+.project-card img {
+  width:100%;
+  border-radius:10px;
+  margin-bottom:15px;
+}
+
+.project-card h3 {
+  margin-bottom:10px;
+}
+
+.project-card p {
+  font-size:14px;
+  opacity:0.8;
+}
+
+.project-card:hover {
+  transform: scale(1.05);
+  box-shadow:0 10px 25px rgba(0,0,0,0.5);
+}
+
+.demo-btn-container {
+  margin-top:30px;
+  opacity:0;
+  transform: translateY(30px);
+}
+
+.demo-btn-container.show {
+  opacity:1;
+  transform: translateY(0);
+  transition: all 0.6s ease-out;
+}
+
+.demo-btn-container .btn {
+  background:#f59e0b;
+  padding:12px 25px;
+  font-weight:600;
+}
+
+.skills {
+  text-align:center;
+  padding:80px 20px;
+}
+
+.skills h2 {
+  font-size:30px;
+  margin-bottom:40px;
+  opacity:0.8;
+}
+
+.skills-container {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:40px;
+}
+
+.skills-container img {
+  width:60px;
+  transition:0.3s;
+  filter:brightness(0.9);
+  animation: floatSkills 3s ease-in-out infinite;
+}
+
+.skills-container img:hover {
+  transform: scale(1.4) rotate(10deg);
+  filter:brightness(1.5);
+}
+
+@keyframes floatSkills {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.experience {
+  text-align:center;
+  padding:50px 20px;
+  background: rgba(0,0,0,0.3);
+}
+
+.experience h2 {
+  font-size:36px;
+  margin-bottom:30px;
+  opacity:0;
+  transform: scale(0.8);
+  transition: all 0.6s ease-out;
+}
+
+.experience h2.show {
+  opacity:1;
+  transform: scale(1);
+}
+
+.experience-container {
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:20px;
+  max-width:900px;
+  margin:auto;
+}
+
+.exp-card {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  border-radius:15px;
+  padding:20px 25px;
+  min-width:220px;
+  font-size:16px;
+  color:#ffffff;
+  opacity:0;
+  transform: scale(0.9);
+  transition: all 0.5s ease-in-out;
+  cursor:pointer;
+}
+
+.exp-card.show {
+  opacity:1;
+  transform: scale(1);
+  animation: colorPulse 3s ease-in-out infinite alternate;
+}
+
+.exp-card:hover {
+  transform: scale(1.05);
+  color:#38bdf8;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+@keyframes colorPulse {
+  0% { color:#ffffff; transform: scale(1); }
+  50% { color:#38bdf8; transform: scale(1.05); }
+  100% { color:#ffffff; transform: scale(1); }
+}
+
+footer {
+  text-align:center;
+  padding:20px;
+  background:rgba(0,0,0,0.5);
+}
+
+@media (max-width:768px) {
+  .hero-container {
+    flex-direction:column;
+    text-align:center;
+  }
+  
+  .hero-img {
+    text-align:center;
+    margin-top:20px;
+  }
+  
+  .project-card {
+    width:90%;
+  }
+}
+</style>
+</head>
+
+<body>
+<div id="progress-bar"></div>
+
+<nav>
+  <h2>Salem</h2>
+  <div>
+    <a href="index.html">Home</a>
+    <a href="projects.html">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-container">
+    <div class="hero-text">
+      <h1>Hello, I'm <span>Salem</span></h1>
+      <p>Creative Web Designer & Developer crafting seamless and engaging web experiences.</p>
+      <div class="buttons">
+        <a href="https://github.com/salem200-web" class="btn github">GitHub</a>
+        <a href="https://x.com/alhdadidi06" class="btn x">X</a>
+        <a href="https://discord.gg/38r2erWY" class="btn discord">Discord</a>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="Gojo.jpg" alt="profile">
+    </div>
+  </div>
+</section>
+
+<section class="projects" id="projects">
+  <h2>My Projects</h2>
+
+  <div class="project-card">
+    <img src="download (1).jpg" alt="Game Rating Website">
+    <h3>Game Rating Website</h3>
+    <p>A website to review and rate different games, with user login and interactive UI.</p>
+  </div>
+
+  <div class="project-card">
+    <img src="download (2).jpg" alt="Number Game">
+    <h3>Number Game</h3>
+    <p>A fun number guessing game built with JavaScript, providing score tracking and levels.</p>
+  </div>
+
+  <div class="project-card">
+    <img src="download.jpg" alt="Weather App">
+    <h3>Weather App</h3>
+    <p>An app to check the weather in any city, using a public API for real-time data.</p>
+  </div>
+</section>
+
+<section class="skills" id="skills">
+  <h2>Technologies</h2>
+  <div class="skills-container">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker">
+  </div>
+</section>
+
+<section class="experience" id="experience">
+  <h2>My Experience</h2>
+  <div class="experience-container">
+    <div class="exp-card">Age: 20</div>
+    <div class="exp-card">Education: Arab Academy University (AAU), Amman</div>
+    <div class="exp-card">Major: Artificial Intelligence (AI)</div>
+    <div class="exp-card">Experience: Front-end development with strong skills and creativity</div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Salem</p>
+</footer>
+
+<script>
+window.onscroll = function() {
+  let scrollTop = document.documentElement.scrollTop;
+  let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  let scrolled = (scrollTop / height) * 100;
+  document.getElementById("progress-bar").style.width = scrolled + "%";
+};
+
+window.addEventListener('load', () => {
+  const items = document.querySelectorAll('.project-card, .demo-btn-container');
+  items.forEach((item, index) => {
+    setTimeout(() => {
+      item.classList.add('show');
+    }, index * 300);
+  });
+
+  const expHeader = document.querySelector('.experience h2');
+  expHeader.classList.add('show');
+
+  const expCards = document.querySelectorAll('.exp-card');
+  expCards.forEach((card, index) => {
+    setTimeout(() => {
+      card.classList.add('show');
+    }, index * 300);
+  });
+});
+</script>
+
+</body>
+</html>

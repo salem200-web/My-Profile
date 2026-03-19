@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minecraft Hub</title>
+
+<style>
+/* ======= Body ======= */
+body {
+  margin: 0;
+  font-family: 'Press Start 2P', cursive;
+  background: url('minecraft-bg.jpg') center/cover no-repeat fixed;
+  color: #fff;
+  overflow-x: hidden;
+  background-color: #1a1a1a;
+}
+
+/* ======= Dark overlay + particles ======= */
+body::after {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  top: 0;
+  left: 0;
+  z-index: -2;
+}
+
+/* ======= Floating block particles ======= */
+.particle {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  background: url('block.png') center/cover no-repeat;
+  opacity: 0.7;
+  animation: floatBlock linear infinite;
+  z-index: -1;
+}
+
+@keyframes floatBlock {
+  from { transform: translateY(110vh) rotate(0deg); }
+  to { transform: translateY(-20vh) rotate(360deg); }
+}
+
+/* ======= Navbar ======= */
+.navbar {
+  padding: 20px 50px;
+  background: rgba(0,0,0,0.8);
+  text-align: center;
+  letter-spacing: 2px;
+  font-size: 20px;
+  color: #00ff00;
+}
+
+/* ======= Main Section ======= */
+.game-details {
+  padding: 100px 20px;
+  max-width: 900px;
+  margin: auto;
+  text-align: center;
+  animation: fadeIn 3s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* ======= Minecraft Title ======= */
+.title {
+  font-size: 60px;
+  background: linear-gradient(90deg, #00ff00, #7fff00, #00ff00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: pixelShine 4s linear infinite;
+}
+
+@keyframes pixelShine {
+  0% { background-position: 0% 0; }
+  50% { background-position: 200% 0; }
+  100% { background-position: 0% 0; }
+}
+
+/* ======= Detail lines ======= */
+.detail-line {
+  margin: 20px 0;
+  font-size: 20px;
+  transition: 0.5s;
+}
+
+.detail-line:hover {
+  color: #7fff00;
+  text-shadow: 0 0 15px #7fff00;
+  transform: scale(1.05);
+}
+
+/* ======= Explore button ======= */
+#exploreBtn {
+  margin-top: 50px;
+  padding: 15px 50px;
+  background: #222;
+  color: #00ff00;
+  border: 2px solid #00ff00;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+#exploreBtn:hover {
+  background: #00ff00;
+  color: #222;
+  box-shadow: 0 0 30px #00ff00;
+}
+
+/* ======= Block break effect ======= */
+.break {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: url('block.png') center/cover no-repeat;
+  animation: breakAnim 0.6s forwards;
+}
+
+@keyframes breakAnim {
+  0% { transform: scale(1) rotate(0deg); opacity: 1; }
+  100% { transform: scale(0) rotate(720deg); opacity: 0; }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Floating particles -->
+<div id="particlesContainer"></div>
+
+<div class="navbar">GAME HUB</div>
+
+<section class="game-details">
+  <h1 class="title">Minecraft</h1>
+
+  <p class="detail-line"><strong>Type:</strong> Sandbox, Survival</p>
+  <p class="detail-line"><strong>Release Date:</strong> November 2011</p>
+  <p class="detail-line"><strong>Rating:</strong> 9.5/10</p>
+
+  <p class="detail-line">
+    Explore, craft, and survive in a blocky world full of adventures and mobs.
+  </p>
+
+  <button id="exploreBtn">BREAK BLOCK</button>
+</section>
+
+<script>
+// ======= Floating Particles =======
+const particleContainer = document.getElementById('particlesContainer');
+for(let i=0; i<30; i++){
+  const p = document.createElement('div');
+  p.classList.add('particle');
+  p.style.left = Math.random() * 100 + 'vw';
+  p.style.animationDuration = (5 + Math.random()*10) + 's';
+  p.style.width = p.style.height = (10 + Math.random()*30) + 'px';
+  particleContainer.appendChild(p);
+}
+
+// ======= Block Break Effect =======
+document.getElementById("exploreBtn").addEventListener("click", function() {
+  for(let i=0; i<5; i++){
+    const block = document.createElement("div");
+    block.classList.add("break");
+    block.style.left = Math.random()*this.offsetWidth + "px";
+    block.style.top = Math.random()*this.offsetHeight + "px";
+    this.appendChild(block);
+
+    setTimeout(() => block.remove(), 600);
+  }
+
+  alert("You smashed a Minecraft block!");
+});
+</script>
+
+</body>
+</html>

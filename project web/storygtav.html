@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GTA V Full Story</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Orbitron:wght@600&display=swap" rel="stylesheet">
+<style>
+* {margin:0;padding:0;box-sizing:border-box;}
+body {font-family:'Cairo',sans-serif; background:#111; color:#eee; line-height:1.6;}
+
+/* ===== Hero Section ===== */
+.hero {background:url('https://wallpaperaccess.com/full/1812763.jpg') center/cover fixed; height:60vh; display:flex; align-items:center; justify-content:center; text-align:center; position:relative;}
+.hero::after {content:"";position:absolute;inset:0;background:rgba(0,0,0,0.65);}
+.hero h1 {font-family:'Orbitron',sans-serif;color:#f5d800;font-size:3rem; z-index:1; animation:fadeIn 2s ease;}
+.hero p {color:#fff;margin-top:10px; font-size:1.3rem; z-index:1; animation:fadeIn 3s ease;}
+
+/* ===== Sections ===== */
+section {padding:40px 20px; max-width:900px; margin:auto;}
+h2 {font-family:'Orbitron',sans-serif;text-align:center;color:#f5d800;margin-bottom:20px;font-size:2rem; animation:fadeIn 1.5s ease;}
+
+/* ===== Cards ===== */
+.card {background:rgba(20,20,20,0.9); border:2px solid #f5d800; border-radius:12px; padding:20px; margin:15px 0; animation:slideIn 1s ease forwards; opacity:0; cursor:default;}
+.card:nth-child(1){animation-delay:.2s;}
+.card:nth-child(2){animation-delay:.4s;}
+.card:nth-child(3){animation-delay:.6s;}
+
+/* ===== Animations ===== */
+@keyframes fadeIn {from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+@keyframes slideIn {to{opacity:1;}}
+
+/* ===== Toggle Button ===== */
+.toggle {display:block;background:#f5d800;color:#000;text-align:center;padding:12px;margin:30px auto;width:200px;border-radius:8px;cursor:pointer;font-weight:bold;font-size:1.1rem;transition:.3s;}
+.toggle:hover {background:#ffeb3b;}
+
+/* ===== Hidden Extra ===== */
+.extra {display:none;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div>
+    <h1>GTA V Full Story</h1>
+    <p>Details of Characters, Missions, and Endings</p>
+  </div>
+</div>
+
+<section>
+  <h2>📜 Story Introduction</h2>
+  <div class="card">
+    The game starts in 2004 in North Yankton, where three criminals (Michael, Trevor, and Brad) pull off a major bank heist that goes disastrously wrong.
+  </div>
+  <div class="card">
+    Nine years later, the story moves to Los Santos, where the lives of Michael, Franklin, and Trevor intertwine in a city full of crime, betrayal, and high-profile heists.
+  </div>
+</section>
+
+<section>
+  <h2>🧍‍♂️ Main Characters</h2>
+  <div class="card">
+    <h3>1. Michael De Santa</h3>
+    A retired bank robber living a luxurious life with his family, dragged back into crime due to personal and financial struggles.
+  </div>
+  <div class="card">
+    <h3>2. Franklin Clinton</h3>
+    A young ambitious hustler trying to rise above street life and become a professional criminal.
+  </div>
+  <div class="card">
+    <h3>3. Trevor Philips</h3>
+    An unpredictable and violent criminal, Michael's old friend, who believes Michael is dead and runs his own criminal empire.
+  </div>
+</section>
+
+<section>
+  <h2>🗂️ Mission Count</h2>
+  <div class="card">
+    🔹 <strong>Main Missions:</strong> Around 69 core missions driving the story forward.
+  </div>
+  <div class="card">
+    🔹 <strong>Side Missions:</strong> Over 50 “Strangers & Freaks” missions with unique characters.
+  </div>
+  <div class="card">
+    🔹 <strong>Random Events & Activities:</strong> Racing, parachuting, hunting, and other open-world events.
+  </div>
+</section>
+
+<section>
+  <h2>🧠 Mission Distribution by Character</h2>
+  <div class="card">
+    🟡 Michael — approx. 44–69 missions (most in the story)
+  </div>
+  <div class="card">
+    🔵 Franklin — approx. 39–59 missions
+  </div>
+  <div class="card">
+    🔴 Trevor — approx. 31–58 missions
+  </div>
+</section>
+
+<section>
+  <h2>🔥 Story Endings</h2>
+  <div class="card">
+    At the end of the game, players choose from three endings:
+    <ul>
+      <li>A. Kill Trevor</li>
+      <li>B. Kill Michael</li>
+      <li>C. Option Three: Save everyone and keep all three characters alive</li>
+    </ul>
+  </div>
+  <div class="card">
+    Most players consider <strong>Option C</strong> as the “true ending” because all three survive and remain united.
+  </div>
+</section>
+
+<section>
+  <h2>📌 Playtime & Tips</h2>
+  <div class="card">
+    Focusing only on the main story: ~20–30 hours of gameplay.
+  </div>
+  <div class="card">
+    Completing all side missions and activities: 80+ hours of gameplay.
+  </div>
+</section>
+
+<div class="toggle" onclick="toggleExtra()">Click to show more details</div>
+
+<section class="extra" id="extraDetails">
+  <h2>📘 Additional Details</h2>
+  <div class="card">
+    🌐 Developed by Rockstar North and published by Rockstar Games.
+  </div>
+  <div class="card">
+    📍 Set in a massive open world including Los Santos and Blaine County.
+  </div>
+  <div class="card">
+    🎯 Features multiple heist missions with different planning options.
+  </div>
+</section>
+
+<script>
+function toggleExtra() {
+  const extra = document.getElementById('extraDetails');
+  extra.style.display = extra.style.display === 'block' ? 'none' : 'block';
+}
+</script>
+
+</body>
+</html>

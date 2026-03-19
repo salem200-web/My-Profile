@@ -1,0 +1,82 @@
+.users-container {
+    background: #1f1f1f;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.users-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+#searchInput {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: none;
+    width: 250px;
+}
+
+.add-btn {
+    background: #3b82f6;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background: #292929;
+}
+
+tr:nth-child(even) {
+    background: #242424;
+}
+
+.edit {
+    background: #facc15;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete {
+    background: #ef4444;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+}
+
+.active-status {
+    color: #22c55e;
+    font-weight: bold;
+}
+
+.inactive-status {
+    color: #ef4444;
+    font-weight: bold;
+}
+
+/* Arabic Mode */
+body.ar table {
+    direction: rtl;
+}
+
+body.ar th, 
+body.ar td {
+    text-align: right;
+}

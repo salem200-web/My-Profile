@@ -1,0 +1,119 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* خلفية متحركة */
+.background{
+    position:fixed;
+    width:200%;
+    height:200%;
+    background:linear-gradient(45deg,#00c6ff,#0072ff,#6a11cb,#2575fc);
+    animation: moveBg 12s infinite alternate;
+    z-index:-1;
+}
+
+@keyframes moveBg{
+    0%{ transform:translate(-20%,-20%) rotate(0deg);}
+    100%{ transform:translate(-10%,-10%) rotate(15deg);}
+}
+
+header{
+    display:flex;
+    justify-content:space-between;
+    padding:20px 60px;
+    background:rgba(0,0,0,0.3);
+    backdrop-filter:blur(10px);
+}
+
+.logo{
+    font-size:24px;
+}
+
+nav a{
+    margin-left:20px;
+    text-decoration:none;
+    color:white;
+    font-weight:500;
+}
+
+.btn-login{
+    background:#00c6ff;
+    padding:8px 15px;
+    border-radius:8px;
+    color:black;
+}
+
+.hero{
+    text-align:center;
+    padding:100px 20px;
+}
+
+.fade-in{
+    opacity:0;
+    animation:fade 1s forwards;
+}
+
+.delay{
+    animation-delay:0.5s;
+}
+
+@keyframes fade{
+    to{ opacity:1;}
+}
+
+.glow-btn{
+    margin-top:20px;
+    padding:12px 30px;
+    border:none;
+    border-radius:10px;
+    background:#00c6ff;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 0 20px #00c6ff;
+}
+
+.glow-btn:hover{
+    transform:scale(1.1);
+    box-shadow:0 0 40px #00ffff;
+}
+
+.stats{
+    display:flex;
+    justify-content:center;
+    gap:80px;
+    padding:50px 0;
+    text-align:center;
+}
+
+.products{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    padding:60px;
+}
+
+.card{
+    background:rgba(255,255,255,0.1);
+    backdrop-filter:blur(20px);
+    padding:25px;
+    border-radius:20px;
+    width:250px;
+    text-align:center;
+    transition:0.4s;
+    transform-style:preserve-3d;
+}
+
+.card:hover{
+    transform:scale(1.05);
+    box-shadow:0 20px 40px rgba(0,0,0,0.6);
+}

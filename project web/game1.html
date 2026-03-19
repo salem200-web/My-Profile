@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Last of Us Part II - Gaming Hub</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body {
+  background: #111;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 50px;
+  background: #1a1a1a;
+  position: sticky;
+  top: 0;
+}
+
+.navbar .logo { color: #ff3c3c; font-weight: bold; }
+.nav-links li { display: inline-block; margin: 0 15px; }
+
+.game-details {
+  padding: 50px 20px;
+  max-width: 800px;
+  margin: auto;
+  text-align: left;
+}
+
+.game-details h1 {
+  font-size: 36px;
+  color: #ff3c3c;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeInDown 1s forwards;
+}
+
+.detail-line {
+  margin-bottom: 15px;
+  font-size: 18px;
+  opacity: 0;
+}
+
+.detail-line:hover {
+  color: #ff3c3c;
+  transition: 0.3s;
+}
+
+/* Buy button */
+#buyBtn {
+  margin-top: 30px;
+  padding: 10px 20px;
+  background: #ff3c3c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+#buyBtn:hover {
+  background: #e02b2b;
+}
+#buyBtn {
+  box-shadow: 0 0 15px #ff3c3c;
+}
+
+#buyBtn:hover {
+  box-shadow: 0 0 25px #ff0000;
+  transform: scale(1.05);
+}
+
+@keyframes fadeInDown {
+  0% {opacity: 0; transform: translateY(-20px);}
+  100% {opacity: 1; transform: translateY(0);}
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+.typing-text {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #ff3c3c;
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo">Gaming Hub</div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#games">Games</a></li>
+  </ul>
+</nav>
+
+<section class="game-details">
+  <h1>The Last of Us Part II</h1>
+  
+  <p class="detail-line"><strong>Type:</strong> Action-Adventure, Survival</p>
+  <p class="detail-line"><strong>Release Date:</strong> June 2020</p>
+  <p class="detail-line"><strong>Rating:</strong> 9.5/10</p>
+  <p class="detail-line"><strong>Description:</strong> 
+    <span class="typing-text" id="description"></span>
+  </p>
+  <p class="detail-line"><strong>Story:</strong> 
+    <span class="typing-text" id="story"></span>
+  </p>
+  
+  <button id="buyBtn">BUY NOW</button>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const buyBtn = document.getElementById('buyBtn');
+  buyBtn.addEventListener('click', () => {
+    alert("Thank you for choosing The Last of Us Part II! Our team will contact you shortly.");
+  });
+
+  // Typing effect function
+  function typeText(elementId, text, speed = 50) {
+    const element = document.getElementById(elementId);
+    let i = 0;
+    element.innerHTML = '';
+    const interval = setInterval(() => {
+      element.innerHTML += text.charAt(i);
+      i++;
+      if(i >= text.length) clearInterval(interval);
+    }, speed);
+  }
+
+  const descriptionText = "Action-adventure, story-driven survival game set in a post-apocalyptic world. Follow Ellie as she navigates danger and moral dilemmas.";
+  const storyText = "Ellie embarks on a journey of revenge and survival, facing both infected creatures and human enemies. Themes of loss, hope, and morality are explored deeply.";
+
+  // Trigger typing animation with delays
+  setTimeout(() => typeText('description', descriptionText), 500);
+  setTimeout(() => typeText('story', storyText), 2000);
+
+  const details = document.querySelectorAll('.detail-line');
+  details.forEach((el, index) => {
+    el.style.animation = `fadeInDown 0.8s forwards`;
+    el.style.animationDelay = `${index * 0.3 + 1}s`;
+  });
+});
+</script>
+
+</body>
+</html>

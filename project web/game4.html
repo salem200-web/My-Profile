@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Red Dead Redemption 2 - Gaming Hub</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Georgia, serif;
+  background: linear-gradient(rgba(120,0,0,0.8), rgba(0,0,0,0.9)),
+              url('rdr2.jpg') center/cover no-repeat fixed;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+
+body::before {
+  content: "";
+  position: fixed;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,140,0,0.15) 0%, transparent 70%);
+  animation: smoke 15s linear infinite;
+  z-index: -1;
+}
+
+@keyframes smoke {
+  from { transform: translate(-20%, -20%); }
+  to { transform: translate(20%, 20%); }
+}
+
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 50px;
+  background: rgba(0,0,0,0.8);
+  position: sticky;
+  top: 0;
+}
+
+.logo {
+  color: #ffcc00;
+  font-weight: bold;
+  font-size: 20px;
+  letter-spacing: 2px;
+}
+
+.game-details {
+  padding: 80px 20px;
+  max-width: 900px;
+  margin: auto;
+  text-align: center;
+}
+
+.title {
+  font-size: 50px;
+  color: #ffcc00;
+  text-shadow: 0 0 20px rgba(255,200,0,0.6);
+  animation: fadeIn 2s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.sun-line {
+  width: 150px;
+  height: 4px;
+  background: linear-gradient(to right, orange, red);
+  margin: 20px auto;
+  animation: sunrise 3s infinite alternate;
+}
+
+@keyframes sunrise {
+  from { width: 80px; }
+  to { width: 250px; }
+}
+
+.detail-line {
+  margin: 20px 0;
+  font-size: 20px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 1s;
+}
+
+.detail-line:hover {
+  color: #ffcc00;
+}
+
+#buyBtn {
+  margin-top: 40px;
+  padding: 15px 35px;
+  background: darkred;
+  color: #fff;
+  border: 2px solid #ffcc00;
+  font-size: 20px;
+  cursor: pointer;
+  letter-spacing: 2px;
+  transition: 0.4s;
+}
+
+#buyBtn:hover {
+  background: #ffcc00;
+  color: #000;
+  transform: scale(1.08);
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+  <div class="logo">Gaming Hub</div>
+</nav>
+
+<section class="game-details">
+
+  <h1 class="title">Red Dead Redemption 2</h1>
+  <div class="sun-line"></div>
+
+  <p class="detail-line"><strong>Type:</strong> Action, Open World</p>
+  <p class="detail-line"><strong>Release Date:</strong> October 2018</p>
+  <p class="detail-line"><strong>Rating:</strong> 10/10</p>
+
+  <p class="detail-line"><strong>Description:</strong>
+    An epic tale of life in America at the dawn of the modern age.
+  </p>
+
+  <p class="detail-line"><strong>Story:</strong>
+    Follow Arthur Morgan and the Van der Linde gang as they struggle to survive against lawmen, rival gangs, and the changing world.
+  </p>
+
+  <button id="buyBtn">BUY NOW</button>
+
+</section>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.style.opacity = "1";
+      entry.target.style.transform = "translateY(0)";
+    }
+  });
+});
+
+document.querySelectorAll('.detail-line').forEach(el => {
+  observer.observe(el);
+});
+
+document.getElementById("buyBtn").addEventListener("click", () => {
+  alert("Welcome to the Wild West. Purchase started.");
+});
+</script>
+
+</body>
+</html>

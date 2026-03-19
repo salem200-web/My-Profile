@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elden Ring - Dark Edition</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Cinzel', serif;
+  background: url('elden.jpg') center/cover no-repeat fixed;
+  color: #ddd;
+  overflow-x: hidden;
+  background-color: #000;
+}
+
+/* Dark overlay */
+body::after {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(255,215,0,0.1), rgba(0,0,0,0.9));
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/* Moving shadow mist */
+.mist {
+  position: fixed;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+  animation: mistMove 40s linear infinite;
+  z-index: -1;
+}
+
+@keyframes mistMove {
+  from { transform: translate(-20%, -20%); }
+  to { transform: translate(20%, 20%); }
+}
+
+/* Navbar */
+.navbar {
+  padding: 20px 50px;
+  background: rgba(0,0,0,0.8);
+  text-align: center;
+  letter-spacing: 3px;
+  font-size: 22px;
+  color: gold;
+}
+
+/* Main section */
+.game-details {
+  padding: 120px 20px;
+  max-width: 900px;
+  margin: auto;
+  text-align: center;
+  animation: fadeIn 3s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* Golden animated title */
+.title {
+  font-size: 60px;
+  background: linear-gradient(90deg, gold, #fff5cc, gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 5s linear infinite;
+}
+
+@keyframes shine {
+  from { background-position: 0%; }
+  to { background-position: 200%; }
+}
+
+/* Rune line */
+.rune-line {
+  width: 200px;
+  height: 3px;
+  background: gold;
+  margin: 20px auto;
+  box-shadow: 0 0 20px gold;
+  animation: pulse 2s infinite alternate;
+}
+
+@keyframes pulse {
+  from { opacity: 0.4; }
+  to { opacity: 1; }
+}
+
+/* Detail text */
+.detail-line {
+  margin: 30px 0;
+  font-size: 22px;
+  transition: 0.5s;
+}
+
+.detail-line:hover {
+  color: gold;
+  text-shadow: 0 0 15px gold;
+  transform: scale(1.05);
+}
+
+/* Attack button */
+#attackBtn {
+  margin-top: 60px;
+  padding: 15px 50px;
+  background: black;
+  color: gold;
+  border: 2px solid gold;
+  font-size: 22px;
+  cursor: pointer;
+  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+#attackBtn:hover {
+  background: gold;
+  color: black;
+  box-shadow: 0 0 30px gold;
+}
+
+/* Slash effect */
+.slash {
+  position: absolute;
+  width: 300px;
+  height: 5px;
+  background: linear-gradient(to right, transparent, white, transparent);
+  top: 50%;
+  left: -300px;
+  transform: rotate(-20deg);
+  animation: slashMove 0.5s forwards;
+}
+
+@keyframes slashMove {
+  to { left: 100%; opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="mist"></div>
+
+<div class="navbar">GAMING HUB</div>
+
+<section class="game-details">
+  <h1 class="title">Elden Ring</h1>
+  <div class="rune-line"></div>
+
+  <p class="detail-line"><strong>Type:</strong> Action RPG, Dark Fantasy</p>
+  <p class="detail-line"><strong>Release Date:</strong> February 2022</p>
+  <p class="detail-line"><strong>Rating:</strong> 10/10</p>
+
+  <p class="detail-line">
+    Rise, Tarnished, and be guided by grace to brandish the power of the Elden Ring.
+  </p>
+
+  <button id="attackBtn">STRIKE</button>
+</section>
+
+<script>
+document.getElementById("attackBtn").addEventListener("click", function() {
+  const slash = document.createElement("div");
+  slash.classList.add("slash");
+  this.appendChild(slash);
+
+  setTimeout(() => {
+    slash.remove();
+    alert("You have unleashed a strike upon the Lands Between...");
+  }, 500);
+});
+</script>
+
+</body>
+</html>

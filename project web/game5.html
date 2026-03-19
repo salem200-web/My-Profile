@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Horizon Forbidden West - Forest Edition</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Trebuchet MS', sans-serif;
+  background: url('forest.jpg') center/cover no-repeat fixed;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(0,40,20,0.6), rgba(0,0,0,0.8));
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/* Moving fog */
+.fog {
+  position: fixed;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+  animation: moveFog 30s linear infinite;
+  z-index: -1;
+}
+
+@keyframes moveFog {
+  from { transform: translate(-20%, -20%); }
+  to { transform: translate(20%, 20%); }
+}
+
+.leaf {
+  position: fixed;
+  width: 15px;
+  height: 15px;
+  background: rgba(0,255,150,0.5);
+  border-radius: 50%;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-10vh) translateX(0); opacity:1; }
+  100% { transform: translateY(110vh) translateX(100px); opacity:0; }
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 50px;
+  background: rgba(0,0,0,0.6);
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(5px);
+}
+
+.logo {
+  color: #00ff99;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.game-details {
+  padding: 100px 20px;
+  max-width: 900px;
+  margin: auto;
+  text-align: center;
+  animation: fadeIn 2s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.title {
+  font-size: 50px;
+  color: #00ff99;
+  text-shadow: 0 0 20px #00ff99, 0 0 40px rgba(0,255,150,0.5);
+}
+
+.energy-line {
+  width: 150px;
+  height: 4px;
+  background: linear-gradient(to right, #00ff99, #00cc66);
+  margin: 20px auto;
+  animation: expand 3s infinite alternate;
+}
+
+@keyframes expand {
+  from { width: 80px; }
+  to { width: 300px; }
+}
+
+.detail-line {
+  margin: 25px 0;
+  font-size: 20px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 1s;
+}
+
+.detail-line:hover {
+  color: #00ff99;
+  transform: scale(1.05);
+}
+
+/* Energy Button */
+#buyBtn {
+  margin-top: 50px;
+  padding: 15px 40px;
+  background: #00ff99;
+  color: #000;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.4s;
+  box-shadow: 0 0 20px #00ff99;
+  position: relative;
+  overflow: hidden;
+}
+
+#buyBtn:hover {
+  background: #00cc66;
+  transform: scale(1.1);
+  box-shadow: 0 0 40px #00ff99;
+}
+</style>
+</head>
+
+<body>
+
+<div class="fog"></div>
+
+<nav class="navbar">
+  <div class="logo">Gaming Hub</div>
+</nav>
+
+<section class="game-details">
+  <h1 class="title">Horizon Forbidden West</h1>
+  <div class="energy-line"></div>
+
+  <p class="detail-line"><strong>Type:</strong> Action RPG, Open World</p>
+  <p class="detail-line"><strong>Release Date:</strong> February 2022</p>
+  <p class="detail-line"><strong>Rating:</strong> 9/10</p>
+
+  <p class="detail-line"><strong>Description:</strong>
+    Explore wild forests, robotic creatures, and mysterious ruins in a lush post-apocalyptic world.
+  </p>
+
+  <p class="detail-line"><strong>Story:</strong>
+    Follow Aloy as she journeys west to uncover secrets that could save life on Earth.
+  </p>
+
+  <button id="buyBtn">BUY NOW</button>
+</section>
+
+<script>
+// Scroll animation
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.style.opacity = "1";
+      entry.target.style.transform = "translateY(0)";
+    }
+  });
+});
+
+document.querySelectorAll('.detail-line').forEach(el => {
+  observer.observe(el);
+});
+
+// Falling leaves generator
+for(let i=0;i<25;i++){
+  let leaf = document.createElement("div");
+  leaf.classList.add("leaf");
+  leaf.style.left = Math.random()*100 + "vw";
+  leaf.style.animationDuration = (5 + Math.random()*10) + "s";
+  document.body.appendChild(leaf);
+}
+
+// Button
+document.getElementById("buyBtn").addEventListener("click", () => {
+  alert("Entering the Forbidden West Forest...");
+});
+</script>
+
+</body>
+</html>

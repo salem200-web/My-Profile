@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fortnite Hub</title>
+
+<style>
+/* ======= Body ======= */
+body {
+  margin: 0;
+  font-family: 'Bangers', cursive;
+  background: url('fortnite-bg.jpg') center/cover no-repeat fixed;
+  color: #fff;
+  overflow-x: hidden;
+  background-color: #1a1a1a;
+}
+
+/* ======= Dark overlay + spark particles ======= */
+body::after {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  top: 0;
+  left: 0;
+  z-index: -2;
+}
+
+/* ======= Floating sparks ======= */
+.spark {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: radial-gradient(circle, #ff0, transparent);
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: floatSpark linear infinite;
+  z-index: -1;
+}
+
+@keyframes floatSpark {
+  from { transform: translateY(110vh) rotate(0deg); }
+  to { transform: translateY(-20vh) rotate(360deg); }
+}
+
+/* ======= Navbar ======= */
+.navbar {
+  padding: 20px 50px;
+  background: rgba(0,0,0,0.8);
+  text-align: center;
+  letter-spacing: 2px;
+  font-size: 20px;
+  color: #00ccff;
+}
+
+/* ======= Main Section ======= */
+.game-details {
+  padding: 100px 20px;
+  max-width: 900px;
+  margin: auto;
+  text-align: center;
+  animation: fadeIn 3s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* ======= Fortnite Title ======= */
+.title {
+  font-size: 60px;
+  background: linear-gradient(90deg, #00ccff, #ff00ff, #00ccff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: neonShine 4s linear infinite;
+}
+
+@keyframes neonShine {
+  0% { background-position: 0% 0; }
+  50% { background-position: 200% 0; }
+  100% { background-position: 0% 0; }
+}
+
+/* ======= Detail lines ======= */
+.detail-line {
+  margin: 20px 0;
+  font-size: 20px;
+  transition: 0.5s;
+}
+
+.detail-line:hover {
+  color: #ff0;
+  text-shadow: 0 0 15px #ff0;
+  transform: scale(1.05);
+}
+
+/* ======= Action Button ======= */
+#actionBtn {
+  margin-top: 50px;
+  padding: 15px 50px;
+  background: #222;
+  color: #00ccff;
+  border: 2px solid #00ccff;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+#actionBtn:hover {
+  background: #00ccff;
+  color: #222;
+  box-shadow: 0 0 30px #00ccff;
+}
+
+/* ======= Loot drop effect ======= */
+.loot {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: url('loot.png') center/cover no-repeat;
+  animation: lootDrop 0.8s forwards;
+}
+
+@keyframes lootDrop {
+  0% { transform: translateY(-50px) scale(0); opacity: 0; }
+  50% { transform: translateY(30px) scale(1.2); opacity: 1; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* ======= Explosion effect ======= */
+.explosion {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, rgba(255,200,0,0.8), transparent);
+  border-radius: 50%;
+  animation: explode 0.5s forwards;
+}
+
+@keyframes explode {
+  0% { transform: scale(0.5); opacity: 1; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Floating sparks -->
+<div id="sparkContainer"></div>
+
+<div class="navbar">GAME HUB</div>
+
+<section class="game-details">
+  <h1 class="title">Fortnite</h1>
+
+  <p class="detail-line"><strong>Type:</strong> Battle Royale, Sandbox</p>
+  <p class="detail-line"><strong>Release Date:</strong> July 2017</p>
+  <p class="detail-line"><strong>Rating:</strong> 9/10</p>
+
+  <p class="detail-line">
+    Drop into the island, collect loot, build forts, and survive to be the last player standing.
+  </p>
+
+  <button id="actionBtn">DROP LOOT</button>
+</section>
+
+<script>
+// ======= Sparks =======
+const sparkContainer = document.getElementById('sparkContainer');
+for(let i=0; i<40; i++){
+  const s = document.createElement('div');
+  s.classList.add('spark');
+  s.style.left = Math.random() * 100 + 'vw';
+  s.style.animationDuration = (4 + Math.random()*8) + 's';
+  s.style.width = s.style.height = (5 + Math.random()*15) + 'px';
+  sparkContainer.appendChild(s);
+}
+
+// ======= Loot + Explosion =======
+document.getElementById("actionBtn").addEventListener("click", function(e) {
+  // Loot drop
+  for(let i=0; i<3; i++){
+    const loot = document.createElement("div");
+    loot.classList.add("loot");
+    loot.style.left = Math.random()*this.offsetWidth + "px";
+    loot.style.top = Math.random()*this.offsetHeight + "px";
+    this.appendChild(loot);
+
+    setTimeout(() => loot.remove(), 800);
+  }
+
+  // Explosion effect
+  const explosion = document.createElement("div");
+  explosion.classList.add("explosion");
+  explosion.style.left = e.offsetX - 40 + "px";
+  explosion.style.top = e.offsetY - 40 + "px";
+  this.appendChild(explosion);
+  setTimeout(() => explosion.remove(), 500);
+
+  alert("Loot dropped and explosion triggered!");
+});
+</script>
+
+</body>
+</html>

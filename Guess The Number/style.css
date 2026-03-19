@@ -1,0 +1,81 @@
+/* عام */
+body {
+    margin: 0;
+    font-family: 'Poppins', Arial, sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+    transition: background 0.5s;
+}
+
+.container {
+    background: rgba(0,0,0,0.85);
+    padding: 40px;
+    border-radius: 25px;
+    text-align: center;
+    width: 450px;
+    max-width: 90%;
+    box-shadow: 0 0 40px rgba(0,0,0,0.7);
+    animation: fadeIn 0.8s ease;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 2em;
+    letter-spacing: 1px;
+}
+
+input, select {
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    margin: 10px 0;
+    width: 75%;
+    text-align: center;
+    font-size: 1em;
+    transition: 0.3s;
+}
+
+input:focus, select:focus {
+    outline: none;
+    box-shadow: 0 0 8px #00c6ff;
+}
+
+button {
+    padding: 12px 25px;
+    margin: 10px 5px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1em;
+    background: #00c6ff;
+    color: #fff;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #0072ff;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #00c6ff;
+}
+
+p {
+    font-size: 1em;
+    margin: 8px 0;
+    transition: all 0.3s;
+}
+
+/* إخفاء */
+.hidden {
+    display: none;
+}
+
+/* أنيميشن دخول */
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(-20px);}
+    to {opacity: 1; transform: translateY(0);}
+}

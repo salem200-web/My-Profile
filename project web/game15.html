@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grand Theft Auto V</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;800&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:'Orbitron',sans-serif;
+  background:linear-gradient(to bottom,#000 40%,#021b14);
+  color:white;
+  overflow-x:hidden;
+}
+
+/* Neon City Glow Background */
+body::before{
+  content:"";
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:radial-gradient(circle,#00ff8844 10%,transparent 60%);
+  animation:pulse 5s infinite alternate;
+  z-index:-1;
+}
+
+@keyframes pulse{
+  from{opacity:.3; transform:scale(1);}
+  to{opacity:.7; transform:scale(1.3);}
+}
+
+/* Navbar */
+nav{
+  display:flex;
+  justify-content:space-between;
+  padding:20px 60px;
+  background:#000;
+  border-bottom:2px solid #00ff88;
+}
+
+nav h1{
+  font-size:28px;
+  color:#00ff88;
+  letter-spacing:2px;
+  animation:fadeDown 1.2s ease;
+}
+
+nav ul{
+  list-style:none;
+  display:flex;
+  gap:30px;
+}
+
+nav ul li{
+  transition:.3s;
+}
+
+/* Hero */
+.hero{
+  text-align:center;
+  padding:120px 20px;
+}
+
+.hero h2{
+  font-size:50px;
+  margin-bottom:20px;
+  white-space:nowrap;
+  overflow:hidden;
+  border-right:3px solid #00ff88;
+  animation:typing 3s steps(25);
+}
+
+@keyframes typing{
+  from{width:0}
+  to{width:100%}
+}
+
+.hero p{
+  max-width:750px;
+  margin:auto;
+  font-size:18px;
+  line-height:1.7;
+  animation:fadeUp 2s ease;
+}
+
+/* Button */
+.btn{
+  margin-top:35px;
+  padding:15px 40px;
+  border:none;
+  background:#00ff88;
+  color:black;
+  font-size:18px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.btn:hover{
+  background:#ffd700;
+  box-shadow:0 0 20px #ffd700;
+  transform:scale(1.1);
+}
+
+/* Hover Text Effect (المطلوب) */
+h1, h2, h3, p, li {
+  transition: all 0.3s ease;
+  cursor:pointer;
+}
+
+h1:hover,
+h2:hover,
+h3:hover,
+p:hover,
+li:hover{
+  color:#ffd700;
+  transform:scale(1.08);
+  text-shadow:
+    0 0 5px #ffd700,
+    0 0 15px #ffcc00,
+    0 0 25px #ffaa00;
+}
+
+/* Animations */
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(40px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+@keyframes fadeDown{
+  from{opacity:0; transform:translateY(-40px);}
+  to{opacity:1; transform:translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <h1>Grand Theft Auto V</h1>
+  <ul>
+ 
+  </ul>
+</nav>
+
+<section class="hero">
+  <h2>Welcome to Los Santos</h2>
+  <p>
+    Grand Theft Auto V is an open-world action-adventure game developed by Rockstar Games.
+    Set in the massive city of Los Santos, players control three unique characters —
+    Michael, Franklin, and Trevor — each with their own stories and missions.
+    The game features heists, free roaming exploration, online multiplayer,
+    and one of the most detailed open worlds ever created.
+  </p>
+
+  <button class="btn">Enter The City</button>
+</section>
+
+<script>
+document.querySelector(".btn").addEventListener("click",function(){
+  this.style.transform="scale(0.95)";
+  setTimeout(()=>{this.style.transform="scale(1.1)";},150);
+});
+</script>
+
+</body>
+</html>

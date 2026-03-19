@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Guess The Number 🎮</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>🎲 Guess The Number</h1>
+
+    <!-- إدخال الاسم -->
+    <div id="nameSection" class="section">
+        <input type="text" id="playerName" placeholder="Enter your name">
+        <button onclick="saveName()">Start</button>
+    </div>
+
+    <!-- قسم اللعبة -->
+    <div id="gameSection" class="section hidden">
+        <h2 id="welcomeText"></h2>
+
+        <!-- اختيار الصعوبة -->
+        <div class="difficulty">
+            <label>Select Difficulty:</label>
+            <select id="difficulty">
+                <option value="20">Very Easy (20 attempts)</option>
+                <option value="15">Easy (15 attempts)</option>
+                <option value="10">Medium (10 attempts)</option>
+                <option value="5">Hard (5 attempts)</option>
+            </select>
+            <button onclick="startGame()">Start Game</button>
+        </div>
+
+        <!-- منطقة التخمين -->
+        <div id="gameArea" class="hidden">
+            <p id="info"></p>
+            <input type="number" id="guessInput" placeholder="Enter number (1-100)">
+            <button onclick="checkGuess()">Guess</button>
+
+            <p id="result"></p>
+            <p id="attemptsLeft"></p>
+            <p id="previous"></p>
+
+            <button id="restartBtn" onclick="startGame()" class="hidden">🔄 Play Again</button>
+        </div>
+
+        <!-- زر الموسيقى -->
+        <button onclick="toggleMusic()" id="musicBtn">🔊 Music On</button>
+    </div>
+</div>
+
+<!-- الموسيقى الخلفية -->
+<audio id="bgMusic" loop>
+    <source src="y2mate.com - Sessions Vi  A CreatorSafe Collection  Riot Games Music.mp3" type="audio/mpeg">
+</audio>
+
+<script src="script.js"></script>
+</body>
+</html>

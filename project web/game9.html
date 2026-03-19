@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apex Legends Hub</title>
+
+<!-- Google Font for Apex-style -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+
+<style>
+/* ===== Body ===== */
+body {
+  margin: 0;
+  font-family: 'Orbitron', sans-serif;
+  background: url('apex-bg.jpg') center/cover no-repeat fixed;
+  color: #fff;
+  overflow-x: hidden;
+  background-color: #0a0a0a;
+}
+
+/* ===== Dark overlay ===== */
+body::after {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  top: 0;
+  left: 0;
+  z-index: -2;
+}
+
+/* ===== Floating sparks + fire particles ===== */
+.particle {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, #ff4500, transparent);
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: floatParticle linear infinite;
+  z-index: 0;
+}
+
+@keyframes floatParticle {
+  from { transform: translateY(110vh) rotate(0deg); opacity:0; }
+  50% { opacity:0.8; }
+  to { transform: translateY(-20vh) rotate(360deg); opacity:0; }
+}
+
+/* ===== Navbar ===== */
+.navbar {
+  padding: 20px 50px;
+  background: rgba(0,0,0,0.85);
+  text-align: center;
+  letter-spacing: 2px;
+  font-size: 22px;
+  color: #ff4500;
+  text-shadow: 0 0 10px #ff4500;
+}
+
+/* ===== Main Section ===== */
+.game-details {
+  padding: 100px 20px;
+  max-width: 900px;
+  margin: auto;
+  text-align: center;
+  animation: fadeIn 3s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* ===== Apex Title ===== */
+.title {
+  font-size: 60px;
+  background: linear-gradient(90deg, #ff4500, #ff8c00, #ff4500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: neonGlow 3s linear infinite;
+  text-transform: uppercase;
+}
+
+@keyframes neonGlow {
+  0%, 100% { text-shadow: 0 0 10px #ff4500, 0 0 20px #ff8c00; }
+  50% { text-shadow: 0 0 25px #ff6347, 0 0 50px #ff4500; }
+}
+
+/* ===== Detail lines ===== */
+.detail-line {
+  margin: 20px 0;
+  font-size: 20px;
+  transition: 0.4s;
+}
+
+.detail-line:hover {
+  color: #ff8c00;
+  text-shadow: 0 0 20px #ff8c00, 0 0 40px #ff4500;
+  transform: scale(1.08);
+}
+
+/* ===== Action Button ===== */
+#actionBtn {
+  margin-top: 50px;
+  padding: 15px 50px;
+  background: #111;
+  color: #ff4500;
+  border: 2px solid #ff4500;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+#actionBtn:hover {
+  background: #ff4500;
+  color: #111;
+  box-shadow: 0 0 40px #ff8c00, 0 0 60px #ff4500;
+}
+
+/* ===== Loot drop effect ===== */
+.loot {
+  position: absolute;
+  width: 45px;
+  height: 45px;
+  background: url('apex-loot.png') center/cover no-repeat;
+  animation: lootDrop 0.8s forwards;
+}
+
+@keyframes lootDrop {
+  0% { transform: translateY(-60px) scale(0); opacity: 0; }
+  50% { transform: translateY(40px) scale(1.2); opacity: 1; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* ===== Fire explosion ===== */
+.explosion {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(255,69,0,0.9), transparent);
+  border-radius: 50%;
+  animation: explode 0.6s forwards;
+}
+
+@keyframes explode {
+  0% { transform: scale(0.5); opacity: 1; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Floating particles -->
+<div id="particleContainer"></div>
+
+<div class="navbar">GAME HUB</div>
+
+<section class="game-details">
+  <h1 class="title">Apex Legends</h1>
+
+  <p class="detail-line"><strong>Type:</strong> Battle Royale, Hero Shooter</p>
+  <p class="detail-line"><strong>Release Date:</strong> February 2019</p>
+  <p class="detail-line"><strong>Rating:</strong> 9.5/10</p>
+
+  <p class="detail-line">
+    Drop into the arena, choose your legend, collect gear, and survive with your squad to become the champions.
+  </p>
+
+  <button id="actionBtn">DROP SUPPLY</button>
+</section>
+
+<script>
+// ======= Fire Particles =======
+const particleContainer = document.getElementById('particleContainer');
+for(let i=0; i<50; i++){
+  const p = document.createElement('div');
+  p.classList.add('particle');
+  p.style.left = Math.random() * 100 + 'vw';
+  p.style.animationDuration = (3 + Math.random()*6) + 's';
+  p.style.width = p.style.height = (5 + Math.random()*12) + 'px';
+  particleContainer.appendChild(p);
+}
+
+// ======= Loot + Explosion =======
+document.getElementById("actionBtn").addEventListener("click", function(e) {
+  // Loot drop across screen
+  for(let i=0; i<4; i++){
+    const loot = document.createElement("div");
+    loot.classList.add("loot");
+    loot.style.left = Math.random()*window.innerWidth + "px";
+    loot.style.top = Math.random()*window.innerHeight + "px";
+    document.body.appendChild(loot);
+
+    setTimeout(() => loot.remove(), 900);
+  }
+
+  // Explosion at click
+  const explosion = document.createElement("div");
+  explosion.classList.add("explosion");
+  explosion.style.left = e.clientX - 50 + "px";
+  explosion.style.top = e.clientY - 50 + "px";
+  document.body.appendChild(explosion);
+  setTimeout(() => explosion.remove(), 600);
+
+  alert("Supply dropped and explosion triggered!");
+});
+</script>
+
+</body>
+</html>

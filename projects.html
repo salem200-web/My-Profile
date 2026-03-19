@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salem Projects</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+<link rel="icon" href="do" type="image/x-icon">
+<style>
+body {
+  margin:0;
+  font-family:'Poppins', sans-serif;
+  background: linear-gradient(-45deg, #0f172a, #1e293b, #020617, #0ea5e9);
+  background-size:400% 400%;
+  animation: gradientMove 10s ease infinite;
+  color:white;
+}
+
+@keyframes gradientMove {
+  0% {background-position:0% 50%;}
+  50% {background-position:100% 50%;}
+  100% {background-position:0% 50%;}
+}
+
+
+nav {
+  display:flex;
+  justify-content:space-between;
+  padding:20px;
+  background:rgba(0,0,0,0.5);
+  backdrop-filter:blur(10px);
+}
+
+nav h2 {
+  opacity:0;
+  transform: translateY(-20px);
+  animation: fadeInDown 0.8s forwards;
+  animation-delay: 0.2s;
+}
+
+nav a {
+  color:white;
+  text-decoration:none;
+  margin-left:20px;
+  opacity:0;
+  transform: translateY(-20px);
+  transition: color 0.3s;
+}
+
+
+nav a:hover {
+  color: #38bdf8;
+}
+
+
+nav a:nth-child(1) { animation: fadeInDown 0.8s forwards; animation-delay:0.4s; }
+nav a:nth-child(2) { animation: fadeInDown 0.8s forwards; animation-delay:0.6s; }
+nav a:nth-child(3) { animation: fadeInDown 0.8s forwards; animation-delay:0.8s; }
+
+@keyframes fadeInDown {
+  to { opacity:1; transform: translateY(0); }
+}
+
+.projects-container {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap:30px;
+  max-width:1200px;
+  margin:50px auto;
+  padding:0 20px;
+}
+
+.project-card {
+  position:relative;
+  background-size: cover;
+  background-position: center;
+  padding:80px 20px 20px 20px;
+  border-radius:15px;
+  cursor:pointer;
+  text-align:center;
+  color:white;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+  transition: transform 0.3s, box-shadow 0.3s;
+  opacity:0;
+}
+
+.project-card:hover {
+  transform: scale(1.05);
+  box-shadow:0 10px 25px rgba(0,0,0,0.6);
+}
+
+.project-card h3 {
+  margin-bottom:10px;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.project-card:hover h3 {
+  color: #38bdf8;
+  transform: scale(1.05);
+}
+
+.project-card p {
+  font-size:14px;
+  opacity:0.9;
+}
+
+@keyframes slideFromLeft { to {opacity:1; transform: translateX(0);} }
+@keyframes slideFromRight { to {opacity:1; transform: translateX(0);} }
+@keyframes slideFromTop { to {opacity:1; transform: translateY(0);} }
+@keyframes slideFromBottom { to {opacity:1; transform: translateY(0);} }
+
+.contact-title, .contact-info {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.contact-reveal {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <h2>Salem</h2>
+  <div>
+    <a href="index.html">Home</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section class="projects-container" id="projects">
+
+  <div class="project-card" style="background-image:url('download\ \(1\).jpg');" data-direction="left" onclick="location.href='project web/htt.html'">
+    <h3>Game Rating Website</h3>
+    <p>Website to review and rate different games with interactive UI.</p>
+  </div>
+
+  <div class="project-card" style="background-image:url('download\ \(2\).jpg');" data-direction="right" onclick="location.href='Guess The Number/index.html'">
+    <h3>Number Game</h3>
+    <p>A fun number guessing game with scoring and levels.</p>
+  </div>
+
+  <div class="project-card" style="background-image:url('download\ \(3\).jpg');" data-direction="top" onclick="location.href='Weather App/index.html'">
+    <h3>Weather App</h3>
+    <p>App to check weather in any city using public API.</p>
+  </div>
+
+</section>
+
+
+<section id="contact" style="padding:50px; text-align:center; background:rgba(0,0,0,0.5); margin-top:50px; border-radius:15px; max-width:800px; margin-left:auto; margin-right:auto;">
+  <h2 class="contact-title">Contact Me</h2>
+  <p class="contact-info">Email: salem.alhdadidi06@gmail.com</p>
+
+</section>
+
+
+<script>
+
+const cards = document.querySelectorAll('.project-card');
+
+const revealOnScroll = () => {
+  const triggerBottom = window.innerHeight * 0.85;
+  cards.forEach(card => {
+    const cardTop = card.getBoundingClientRect().top;
+    if(cardTop < triggerBottom && !card.classList.contains('revealed')){
+      const direction = card.dataset.direction;
+      switch(direction){
+        case 'left':
+          card.style.transform = 'translateX(-50px)';
+          card.style.animation = 'slideFromLeft 0.8s forwards';
+          break;
+        case 'right':
+          card.style.transform = 'translateX(50px)';
+          card.style.animation = 'slideFromRight 0.8s forwards';
+          break;
+        case 'top':
+          card.style.transform = 'translateY(-50px)';
+          card.style.animation = 'slideFromTop 0.8s forwards';
+          break;
+        case 'bottom':
+          card.style.transform = 'translateY(50px)';
+          card.style.animation = 'slideFromBottom 0.8s forwards';
+          break;
+      }
+      card.classList.add('revealed');
+    }
+  });
+}
+
+
+const contactElements = document.querySelectorAll('.contact-title, .contact-info');
+
+const revealContact = () => {
+  const triggerBottom = window.innerHeight * 0.85;
+  contactElements.forEach((el, i) => {
+    const elTop = el.getBoundingClientRect().top;
+    if(elTop < triggerBottom && !el.classList.contains('contact-reveal')){
+      setTimeout(() => {
+        el.classList.add('contact-reveal');
+      }, i * 200); 
+    }
+  });
+}
+
+window.addEventListener('scroll', () => {
+  revealOnScroll();
+  revealContact();
+});
+window.addEventListener('load', () => {
+  revealOnScroll();
+  revealContact();
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grand Theft Auto IV</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+font-family:'Orbitron',sans-serif;
+background:#000;
+color:white;
+overflow:hidden;
+}
+
+/* ================= LOADING SCREEN ================= */
+#loader{
+position:fixed;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:999;
+animation:fadeOut 3s forwards;
+animation-delay:3s;
+}
+
+#loader h1{
+font-size:50px;
+animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+0%{opacity:0.3;}
+50%{opacity:1;}
+100%{opacity:0.3;}
+}
+
+@keyframes fadeOut{
+to{opacity:0;visibility:hidden;}
+}
+
+/* ================= RAIN ================= */
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
+}
+
+/* ================= NAV ================= */
+nav{
+position:fixed;
+left:0;
+top:0;
+height:100%;
+width:250px;
+background:rgba(0,0,0,0.8);
+padding-top:100px;
+transform:translateX(-100%);
+transition:0.5s;
+}
+
+nav.active{
+transform:translateX(0);
+}
+
+nav ul{
+list-style:none;
+}
+
+nav ul li{
+padding:20px;
+font-size:20px;
+cursor:pointer;
+transition:0.3s;
+}
+
+nav ul li:hover{
+background:#ffd700;
+color:black;
+transform:translateX(10px);
+}
+
+/* Menu Button */
+.menuBtn{
+position:fixed;
+top:20px;
+left:20px;
+font-size:30px;
+cursor:pointer;
+z-index:10;
+}
+
+/* ================= MAIN ================= */
+header{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+}
+
+h1{
+font-size:60px;
+margin-bottom:20px;
+transition:0.3s;
+}
+
+h1:hover{
+color:#ffd700;
+transform:scale(1.1);
+}
+
+/* Smoke Effect */
+.smoke{
+position:absolute;
+bottom:0;
+width:100%;
+height:200px;
+background:linear-gradient(to top,rgba(255,140,0,0.5),transparent);
+animation:smokeMove 5s infinite alternate;
+}
+
+@keyframes smokeMove{
+from{opacity:0.3;}
+to{opacity:0.8;}
+}
+
+/* Sound Button */
+.soundBtn{
+margin-top:30px;
+padding:15px 30px;
+border:2px solid #ffd700;
+background:transparent;
+color:#ffd700;
+cursor:pointer;
+transition:0.3s;
+}
+
+.soundBtn:hover{
+background:#ffd700;
+color:black;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- LOADING SCREEN -->
+<div id="loader">
+<h1>ROCKSTAR PRESENTS</h1>
+</div>
+
+<!-- RAIN CANVAS -->
+<canvas id="rain"></canvas>
+
+<!-- MENU BUTTON -->
+<div class="menuBtn" onclick="toggleMenu()">☰</div>
+
+<!-- NAVIGATION -->
+<nav id="nav">
+<ul>
+<li><a href="storygtav.html">Story</a></li>
+<li>Characters</li>
+<li>Gallery</li>
+<li>Download</li>
+</ul>
+</nav>
+
+<!-- MAIN CONTENT -->
+<header>
+<h1>Grand Theft Auto IV</h1>
+<p>Welcome to Liberty City. Crime, rain, and the American Dream.</p>
+<button class="soundBtn" onclick="toggleSound()">Toggle City Sound</button>
+</header>
+
+<div class="smoke"></div>
+
+<!-- AUDIO -->
+<audio id="citySound" loop>
+<source src="https://www.soundjay.com/ambience/city-ambience-1.mp3" type="audio/mp3">
+</audio>
+
+<script>
+/* ============ MENU ============ */
+function toggleMenu(){
+document.getElementById("nav").classList.toggle("active");
+}
+
+/* ============ SOUND ============ */
+let sound=document.getElementById("citySound");
+function toggleSound(){
+if(sound.paused){
+sound.play();
+}else{
+sound.pause();
+}
+}
+
+/* ============ RAIN EFFECT ============ */
+let canvas=document.getElementById("rain");
+let ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let rainDrops=[];
+for(let i=0;i<500;i++){
+rainDrops.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+length:Math.random()*20,
+speed:Math.random()*5+2
+});
+}
+
+function drawRain(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.strokeStyle="rgba(174,194,224,0.5)";
+ctx.lineWidth=1;
+ctx.lineCap="round";
+
+for(let i=0;i<rainDrops.length;i++){
+let r=rainDrops[i];
+ctx.beginPath();
+ctx.moveTo(r.x,r.y);
+ctx.lineTo(r.x,r.y+r.length);
+ctx.stroke();
+r.y+=r.speed;
+if(r.y>canvas.height){
+r.y=0;
+r.x=Math.random()*canvas.width;
+}
+}
+requestAnimationFrame(drawRain);
+}
+
+drawRain();
+</script>
+
+</body>
+</html>

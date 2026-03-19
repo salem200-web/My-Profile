@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NBA 2K24 Arena</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:'Orbitron',sans-serif;
+  background: radial-gradient(circle at top,#111 0%,#000 60%);
+  color:white;
+  overflow-x:hidden;
+}
+
+/* Animated Background Lights */
+body::before{
+  content:"";
+  position:fixed;
+  width:100%;
+  height:100%;
+  background: radial-gradient(circle,#ff000044 10%,transparent 60%);
+  animation: pulse 4s infinite alternate;
+  z-index:-1;
+}
+
+@keyframes pulse{
+  from{opacity:.3; transform:scale(1);}
+  to{opacity:.6; transform:scale(1.2);}
+}
+
+/* Navbar */
+nav{
+  display:flex;
+  justify-content:space-between;
+  padding:20px 60px;
+  background:#111;
+  border-bottom:2px solid red;
+}
+
+nav h1{
+  font-size:28px;
+  color:red;
+  letter-spacing:2px;
+  animation: fadeDown 1.2s ease;
+}
+
+nav ul{
+  list-style:none;
+  display:flex;
+  gap:30px;
+}
+
+nav ul li{
+  transition:.3s;
+}
+
+nav ul li:hover{
+  color:#ffd700;
+  transform:scale(1.1);
+  text-shadow:0 0 10px #ffd700;
+}
+
+/* Hero Section */
+.hero{
+  text-align:center;
+  padding:120px 20px;
+}
+
+.hero h2{
+  font-size:55px;
+  margin-bottom:20px;
+  animation: typing 3s steps(20);
+  white-space:nowrap;
+  overflow:hidden;
+  border-right:3px solid red;
+}
+
+@keyframes typing{
+  from{width:0}
+  to{width:100%}
+}
+
+.hero p{
+  max-width:700px;
+  margin:auto;
+  font-size:18px;
+  line-height:1.7;
+  animation: fadeUp 2s ease;
+}
+
+/* Buttons */
+.btn{
+  margin-top:30px;
+  padding:15px 35px;
+  border:none;
+  background:red;
+  color:white;
+  font-size:18px;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  transition:.3s;
+}
+
+.btn:hover{
+  background:#ffd700;
+  color:black;
+  box-shadow:0 0 20px #ffd700;
+  transform:scale(1.1);
+}
+
+/* Hover Text Effect */
+h1, h2, h3, p, li {
+  transition: all 0.3s ease;
+  cursor:pointer;
+}
+
+h1:hover,
+h2:hover,
+h3:hover,
+p:hover,
+li:hover{
+  color:#ffd700;
+  transform:scale(1.08);
+  text-shadow:
+    0 0 5px #ffd700,
+    0 0 15px #ffcc00,
+    0 0 25px #ffaa00;
+}
+
+/* Animations */
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(40px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+@keyframes fadeDown{
+  from{opacity:0; transform:translateY(-40px);}
+  to{opacity:1; transform:translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <h1>NBA 2K24</h1>
+  <ul>
+    <li>Home</li>
+    <li>About</li>
+    <li>Features</li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <h2>Welcome to NBA 2K24 Arena</h2>
+  <p>
+    NBA 2K24 is one of the most advanced basketball simulation games in the world,
+    developed by 2K Sports. It delivers realistic gameplay, next-gen graphics,
+    immersive game modes, and competitive online experiences that make players
+    feel like they are truly on the court.
+  </p>
+
+  <button class="btn">Enter The Court</button>
+</section>
+
+<script>
+// Small press animation
+document.querySelector(".btn").addEventListener("click",function(){
+  this.style.transform="scale(0.95)";
+  setTimeout(()=>{this.style.transform="scale(1.1)";},150);
+});
+</script>
+
+</body>
+</html>

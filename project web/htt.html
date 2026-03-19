@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaming Hub - Top 100 Games</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo">Gaming Hub</div>
+  <ul class="nav-links">
+    <li><a href="#games">Games</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="games" class="games-section">
+  <h2>Our Games</h2>
+  <div class="games-container">
+
+<!-- 100 Game Cards -->
+<script>
+const games = [
+"The Last of Us Part II","God of War","Cyberpunk 2077","Red Dead Redemption 2","Horizon Forbidden West",
+"Elden Ring","Minecraft","Fortnite","Apex Legends","Call of Duty: Modern Warfare","Call of Duty: Warzone",
+"FIFA 23","FIFA 24","NBA 2K24","Grand Theft Auto V","Grand Theft Auto IV"
+];
+
+games.forEach((game, index) => {
+  document.write(`
+  <div class="game-card">
+    <h3>${game}</h3>
+    <button onclick="window.location.href='game${index+1}.html'">SHOW NOW</button>
+    <button onclick="alert('Thank you for choosing ${game}! Our team will contact you shortly.')">BUY NOW</button>
+  </div>
+  `);
+});
+</script>
+
+  </div>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>

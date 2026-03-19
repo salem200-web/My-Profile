@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Climate Tracker Dashboard 🌍</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="Sun-Wallpapers-Free-Download.jpg" type="image/x-icon">
+</head>
+<body>
+<div class="container">
+    <h1>🌦 Climate Tracker Dashboard</h1>
+
+    <div class="controls">
+        <input type="text" id="locationInput" placeholder="Enter location...">
+        <button onclick="updateDashboard()">Show Dashboard</button>
+    </div>
+
+    <div id="weatherSection" class="section hidden">
+        <h2 id="cityName">City Name</h2>
+        <p id="localTime">Time: --:--</p>
+        <p id="temperature">Temperature: -- °C</p>
+        <p id="description">Weather: --</p>
+        <img id="weatherIcon" src="" alt="weather icon">
+    </div>
+
+    <div id="historySection" class="section hidden">
+        <h3>Historical Climate Data</h3>
+        <div id="charts">
+            <div class="chart">Temperature Chart</div>
+            <div class="chart">Precipitation Chart</div>
+            <div class="chart">Wind Chart</div>
+            <div class="chart">Air Quality</div>
+        </div>
+    </div>
+
+    <div id="mapSection" class="section hidden">
+        <h3>Weather Map</h3>
+        <div class="map">[Interactive Map Placeholder]</div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

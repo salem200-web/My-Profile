@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COD: Modern Warfare Hub</title>
+
+<!-- Military/tech font -->
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+
+<style>
+/* ===== Body ===== */
+body {
+  margin: 0;
+  font-family: 'Russo One', sans-serif;
+  background: url('cod-bg.jpg') center/cover no-repeat fixed;
+  color: #fff;
+  overflow-x: hidden;
+  background-color: #0a0a0a;
+  position: relative;
+}
+
+/* ===== Dark overlay + dynamic smoke ===== */
+body::after {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  top: 0;
+  left: 0;
+  z-index: -2;
+}
+
+/* ===== Dynamic particles ===== */
+.particle {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, #ff0000, transparent);
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: floatParticle linear infinite;
+  z-index: 0;
+}
+
+.smoke {
+  position: fixed;
+  width: 30px;
+  height: 30px;
+  background: radial-gradient(circle, rgba(128,128,128,0.7), transparent);
+  border-radius: 50%;
+  opacity: 0.4;
+  animation: floatSmoke linear infinite;
+  z-index: 0;
+}
+
+@keyframes floatParticle {
+  from { transform: translateY(110vh) rotate(0deg); opacity:0; }
+  50% { opacity:0.8; }
+  to { transform: translateY(-20vh) rotate(360deg); opacity:0; }
+}
+
+@keyframes floatSmoke {
+  from { transform: translateY(100vh) rotate(0deg) scale(0.5); opacity:0; }
+  50% { opacity:0.5; }
+  to { transform: translateY(-30vh) rotate(360deg) scale(1.5); opacity:0; }
+}
+
+/* ===== Navbar ===== */
+.navbar {
+  padding: 20px 50px;
+  background: rgba(0,0,0,0.85);
+  text-align: center;
+  letter-spacing: 2px;
+  font-size: 24px;
+  color: #ff0000;
+  text-shadow: 0 0 15px #ff0000;
+}
+
+/* ===== Main Section ===== */
+.game-details {
+  padding: 100px 20px;
+  max-width: 1000px;
+  margin: auto;
+  text-align: center;
+  animation: fadeIn 3s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn { to { opacity: 1; } }
+
+/* ===== COD Title ===== */
+.title {
+  font-size: 70px;
+  background: linear-gradient(90deg, #ff0000, #ffffff, #ff0000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: neonGlow 3s linear infinite;
+  text-transform: uppercase;
+}
+
+@keyframes neonGlow {
+  0%, 100% { text-shadow: 0 0 15px #ff0000, 0 0 30px #ffffff; }
+  50% { text-shadow: 0 0 25px #ff4500, 0 0 50px #fff; }
+}
+
+/* ===== Detail lines ===== */
+.detail-line {
+  margin: 20px 0;
+  font-size: 22px;
+  transition: 0.4s;
+}
+
+.detail-line:hover {
+  color: #ff4500;
+  text-shadow: 0 0 20px #ff4500, 0 0 40px #ff0000;
+  transform: scale(1.08);
+}
+
+/* ===== Action Button ===== */
+#actionBtn {
+  margin-top: 50px;
+  padding: 15px 60px;
+  background: #111;
+  color: #ff0000;
+  border: 2px solid #ff0000;
+  font-size: 22px;
+  cursor: pointer;
+  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+#actionBtn:hover {
+  background: #ff0000;
+  color: #111;
+  box-shadow: 0 0 50px #ff4500, 0 0 70px #ff0000;
+}
+
+/* ===== Loot drop / grenade ===== */
+.loot {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: url('cod-loot.png') center/cover no-repeat;
+  animation: lootDrop 0.8s forwards;
+}
+
+@keyframes lootDrop {
+  0% { transform: translateY(-60px) scale(0); opacity:0; }
+  50% { transform: translateY(40px) scale(1.3); opacity:1; }
+  100% { transform: translateY(0) scale(1); opacity:1; }
+}
+
+.explosion {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(255,69,0,0.9), transparent);
+  border-radius: 50%;
+  animation: explode 0.7s forwards;
+}
+
+@keyframes explode {
+  0% { transform: scale(0.5); opacity:1; }
+  100% { transform: scale(3); opacity:0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Particles -->
+<div id="particleContainer"></div>
+
+<div class="navbar">CALL OF DUTY: MODERN WARFARE HUB</div>
+
+<section class="game-details">
+  <h1 class="title">Modern Warfare</h1>
+
+  <p class="detail-line"><strong>Type:</strong> First-Person Shooter, Action</p>
+  <p class="detail-line"><strong>Release Date:</strong> October 2019</p>
+  <p class="detail-line"><strong>Rating:</strong> 9.7/10</p>
+
+  <p class="detail-line">
+    Enter the warzone, equip deadly weapons, execute tactical missions, and survive against elite enemies.
+  </p>
+
+  <button id="actionBtn">DROP SUPPLY / GRENADE</button>
+</section>
+
+<script>
+// ======= Particles + smoke =======
+const container = document.getElementById('particleContainer');
+for(let i=0;i<40;i++){
+  const p = document.createElement('div');
+  p.classList.add('particle');
+  p.style.left = Math.random()*100+'vw';
+  p.style.animationDuration = (3 + Math.random()*5)+'s';
+  p.style.width = p.style.height = (4 + Math.random()*12)+'px';
+  container.appendChild(p);
+}
+for(let i=0;i<20;i++){
+  const s = document.createElement('div');
+  s.classList.add('smoke');
+  s.style.left = Math.random()*100+'vw';
+  s.style.animationDuration = (6 + Math.random()*8)+'s';
+  s.style.width = s.style.height = (20 + Math.random()*40)+'px';
+  container.appendChild(s);
+}
+
+// ======= Loot + explosion + sound =======
+document.getElementById("actionBtn").addEventListener("click", function(e){
+  // Loot drops
+  for(let i=0;i<5;i++){
+    const loot = document.createElement("div");
+    loot.classList.add("loot");
+    loot.style.left = Math.random()*window.innerWidth + "px";
+    loot.style.top = Math.random()*window.innerHeight + "px";
+    document.body.appendChild(loot);
+    setTimeout(()=>loot.remove(),1000);
+  }
+
+  // Explosion
+  const explosion = document.createElement("div");
+  explosion.classList.add("explosion");
+  explosion.style.left = e.clientX-60+"px";
+  explosion.style.top = e.clientY-60+"px";
+  document.body.appendChild(explosion);
+  setTimeout(()=>explosion.remove(),700);
+
+  // Sound (optional, you need cod-sound.mp3 in folder)
+  const audio = new Audio('cod-explosion.mp3');
+  audio.play();
+
+  alert("Supply dropped and explosion triggered!");
+});
+</script>
+
+</body>
+</html>
